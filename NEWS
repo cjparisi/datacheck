@@ -1,0 +1,8 @@
+datacheck 0.9.6
+============
+
+* Initial release
+* Primary functions:
+  * datadict.profile()
+  * runDatacheck() - starts a web based user interface
+

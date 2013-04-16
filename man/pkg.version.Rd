@@ -1,0 +1,22 @@
+\name{pkg.version}
+\alias{pkg.version}
+\title{Get the current version of a package}
+\usage{
+  pkg.version(pkg)
+}
+\arguments{
+  \item{pkg}{the package name}
+}
+\value{
+  a string with the package number
+}
+\description{
+  Uses the citation() function.
+}
+\author{
+  Reinhard Simon
+}
+\seealso{
+  Other helper: \code{\link{shortSummary}}
+}
+

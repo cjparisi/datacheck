@@ -1,0 +1,28 @@
+\name{has.punct}
+\alias{has.punct}
+\title{Tests for presence of most common punctuation characters}
+\usage{
+  has.punct(s)
+}
+\arguments{
+  \item{s}{a character string}
+}
+\value{
+  boolean TRUE if detects anything
+}
+\description{
+  These include: .?'!_#$^&*()+=<>,;' - and [tab] and [at]
+}
+\examples{
+
+has.punct(".") == TRUE
+}
+\author{
+  Reinhard Simon
+}
+\seealso{
+  Other rule_checks: \code{\link{is.oneOf}},
+  \code{\link{is.onlyLowers}}, \code{\link{is.properName}},
+  \code{\link{is.withinRange}}
+}
+

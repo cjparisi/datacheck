@@ -1,0 +1,39 @@
+\name{has.ruleErrors}
+\alias{has.ruleErrors}
+\title{Quick check if a rule profile on a table has any errors.}
+\usage{
+  has.ruleErrors(profile.rules)
+}
+\arguments{
+  \item{profile.rules}{a data.profile object}
+}
+\value{
+  boolean
+}
+\description{
+  Quick check if a rule profile on a table has any errors.
+}
+\examples{
+
+# Get example data file with some errors in it
+atbler= system.file("examples/db-err.csv", package='datacheck')
+arule = system.file("examples/rules1.R", package='datacheck')
+
+at = read.csv(atbler, stringsAsFactors = FALSE)
+ad = read.rules(arule)
+
+db_e = datadict.profile(at, ad)
+
+has.ruleErrors(db_e) == TRUE
+
+}
+\author{
+  Reinhard Simon
+}
+\seealso{
+  Other datadict: \code{\link{as.rules}},
+  \code{\link{datadict.profile}},
+  \code{\link{is.datadict.profile}},
+  \code{\link{prep4rep}}, \code{\link{read.rules}}
+}
+

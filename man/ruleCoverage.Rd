@@ -1,0 +1,32 @@
+\name{ruleCoverage}
+\alias{ruleCoverage}
+\title{Dotchart of rules per variable}
+\usage{
+  ruleCoverage(profile, rLowest = 1, rLow = 2, rOk = 3,
+    rMax = 10)
+}
+\arguments{
+  \item{profile}{a datadict profile object}
+
+  \item{rLowest}{lowest acceptable number of rules per
+  variable}
+
+  \item{rLow}{an intermediate low number of rules per
+  variable}
+
+  \item{rOk}{the 'ok' number of rules per variable}
+
+  \item{rMax}{= the maximum number of rules per variable}
+}
+\description{
+  Summarizes rule coverage. There should be at least 3x
+  coverage.
+}
+\author{
+  Reinhard Simon
+}
+\seealso{
+  Other visuals: \code{\link{heatmap.quality}},
+  \code{\link{scoreSum}}
+}
+

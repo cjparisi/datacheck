@@ -1,0 +1,56 @@
+\name{is.datadict.profile}
+\alias{is.datadict.profile}
+\title{is.datadict.profile}
+\usage{
+  is.datadict.profile(x)
+}
+\arguments{
+  \item{x}{The object to be tested.}
+}
+\value{
+  boolean
+}
+\description{
+  Is this a datadict.profile object
+}
+\examples{
+
+# Get example data files
+atable = system.file("examples/db.csv", package='datacheck')
+arule  = system.file("examples/rules1.R", package='datacheck')
+aloctn = system.file("examples/location.csv", package='datacheck') # for use in is.oneOf
+
+ctable = basename(atable)
+crule  = basename(arule)
+cloctn = basename(aloctn)
+
+cwd = tempdir()
+owd = getwd()
+setwd(cwd)
+
+file.copy(atable, ctable)
+file.copy(arule,  crule)
+file.copy(aloctn, cloctn)
+
+at = read.csv(ctable, stringsAsFactors = FALSE)
+ad = read.rules(crule)
+
+db = datadict.profile(at, ad)
+
+is.datadict.profile(db) == TRUE
+
+db
+
+setwd(owd)
+
+}
+\author{
+  Reinhard Simon
+}
+\seealso{
+  Other datadict: \code{\link{as.rules}},
+  \code{\link{datadict.profile}},
+  \code{\link{has.ruleErrors}}, \code{\link{prep4rep}},
+  \code{\link{read.rules}}
+}
+

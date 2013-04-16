@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>A vignette for <em>datacheck</em> package (version 0.9.6)</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+</style>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: rgb(88, 72, 246)
+   }
+
+   pre .number {
+     color: rgb(0, 0, 205);
+   }
+
+   pre .comment {
+     color: rgb(76, 136, 107);
+   }
+
+   pre .keyword {
+     color: rgb(0, 0, 255);
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: rgb(3, 106, 7);
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+</head>
+
+<body>
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{A Vignette for datacheck package}
+-->
+
+<h1>A vignette for <em>datacheck</em> package (version 0.9.6)</h1>
+
+<p>Reinhard Simon, International Potato Center, Lima, Peru</p>
+
+<p>The library <em>datacheck</em> provides some simple functions to check the consistency of a dataset. It assumes data are available in tabular format - typically a csv file with
+objects or records in rows and attributes or variables in the columns.</p>
+
+<p>In a database setting the variables would be controlled by the database - at least
+conformance to types (character, numeric, etc) and allowed min/maximum values.
+However, often data are gathered in simple spreadsheets or are for other reasons 
+without such constraints. Here, data constraints like allowed types or values, expected
+values and relationships can be defined using R commands and syntax. This allows much
+more flexibility and fine grained control. Typically it demands also a lot of domain
+knowledge from the user. It is therefore often useful to re-use such domain aware rule files across tables with similar content. Therefore this tool is foregiving if rules cannot be executed if a variable is not present in the table to be analyzed allowing the reuse of such rule files.</p>
+
+<h2>Using the HTML interface</h2>
+
+<p>Use the following commands to copy some example files to your current working directory (uncomment the file.copy command):</p>
+
+<pre><code class="r">atable = system.file(&quot;examples/soilsamples.csv&quot;, package = &quot;datacheck&quot;)
+srules = system.file(&quot;examples/soil_rules.R&quot;, package = &quot;datacheck&quot;)
+
+# Uncomment the next two lines
+
+# file.copy(atable, &#39;soilsamples.csv&#39;) file.copy(srules, &#39;soil_rules.R&#39;)
+</code></pre>
+
+<p>Then type in the command <em>runDatacheck()</em> in the R editor.</p>
+
+<p>Use the upload buttons to load the respective files in your working directory.
+Review the results.</p>
+
+<h2>Using the command line interface</h2>
+
+<p>Assuming you have copied the above mentioned files in your working directory proceed to
+read in the data.</p>
+
+<pre><code class="r">
+
+atable = read.csv(atable, header = TRUE, stringsAsFactors = FALSE)
+srules = read.rules(srules)
+profil = datadict.profile(atable, srules)
+</code></pre>
+
+<p>You can inspect a graphical summary of rules per variable:</p>
+
+<pre><code class="r">ruleCoverage(profil)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-3"/> </p>
+
+<p>The cumulative number of records with increasing scores.</p>
+
+<pre><code class="r">scoreSum(profil)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-4"/> </p>
+
+<p>Or see the tables (only the first 20 records and first 6 columns shown):</p>
+
+<pre><code class="r">xtable(atable[1:20, 1:6])
+</code></pre>
+
+<!-- html table generated in R 3.0.0 by xtable 1.7-1 package -->
+
+<!-- Tue Apr 16 16:05:05 2013 -->
+
+<TABLE border=1>
+<TR> <TH>  </TH> <TH> ID </TH> <TH> Latitude </TH> <TH> Longitude </TH> <TH> Country </TH> <TH> Adm1 </TH> <TH> Adm2 </TH>  </TR>
+  <TR> <TD align="right"> 1 </TD> <TD align="right">   1 </TD> <TD align="right"> -7.48 </TD> <TD align="right"> -78.97 </TD> <TD> Peru </TD> <TD> Cajamarca </TD> <TD> Contumazá </TD> </TR>
+  <TR> <TD align="right"> 2 </TD> <TD align="right">   2 </TD> <TD align="right"> -7.48 </TD> <TD align="right"> -78.97 </TD> <TD> Peru </TD> <TD> Cajamarca </TD> <TD> Contumazá </TD> </TR>
+  <TR> <TD align="right"> 3 </TD> <TD align="right">   3 </TD> <TD align="right"> -7.48 </TD> <TD align="right"> -78.97 </TD> <TD> Peru </TD> <TD> Cajamarca </TD> <TD> Contumazá </TD> </TR>
+  <TR> <TD align="right"> 4 </TD> <TD align="right">   4 </TD> <TD align="right"> -18.18 </TD> <TD align="right"> -70.47 </TD> <TD> Peru </TD> <TD> Tacna </TD> <TD> Tacna </TD> </TR>
+  <TR> <TD align="right"> 5 </TD> <TD align="right">   5 </TD> <TD align="right"> -12.26 </TD> <TD align="right"> -75.07 </TD> <TD> Peru </TD> <TD> Huancavelica </TD> <TD> Tayacaja </TD> </TR>
+  <TR> <TD align="right"> 6 </TD> <TD align="right">   6 </TD> <TD align="right"> -12.26 </TD> <TD align="right"> -75.07 </TD> <TD> Peru </TD> <TD> Huancavelica </TD> <TD> Tayacaja </TD> </TR>
+  <TR> <TD align="right"> 7 </TD> <TD align="right">   7 </TD> <TD align="right"> -12.24 </TD> <TD align="right"> -75.05 </TD> <TD> Peru </TD> <TD> Huancavelica </TD> <TD> Tayacaja </TD> </TR>
+  <TR> <TD align="right"> 8 </TD> <TD align="right">   8 </TD> <TD align="right"> -12.24 </TD> <TD align="right"> -75.05 </TD> <TD> Peru </TD> <TD> Huancavelica </TD> <TD> Tayacaja </TD> </TR>
+  <TR> <TD align="right"> 9 </TD> <TD align="right">   9 </TD> <TD align="right"> -12.08 </TD> <TD align="right"> -76.95 </TD> <TD> Peru </TD> <TD> Lima </TD> <TD> Lima </TD> </TR>
+  <TR> <TD align="right"> 10 </TD> <TD align="right">  10 </TD> <TD align="right"> -12.08 </TD> <TD align="right"> -76.95 </TD> <TD> Peru </TD> <TD> Lima </TD> <TD> Lima </TD> </TR>
+  <TR> <TD align="right"> 11 </TD> <TD align="right">  11 </TD> <TD align="right"> -12.03 </TD> <TD align="right"> -75.24 </TD> <TD> Peru </TD> <TD> Junin </TD> <TD> Huancayo </TD> </TR>
+  <TR> <TD align="right"> 12 </TD> <TD align="right">  12 </TD> <TD align="right"> -11.13 </TD> <TD align="right"> -75.36 </TD> <TD> Peru </TD> <TD> Junin </TD> <TD> Chanchamayo </TD> </TR>
+  <TR> <TD align="right"> 13 </TD> <TD align="right">  13 </TD> <TD align="right"> -10.58 </TD> <TD align="right"> -75.40 </TD> <TD> Peru </TD> <TD> Pasco </TD> <TD> Oxapampa </TD> </TR>
+  <TR> <TD align="right"> 14 </TD> <TD align="right">  14 </TD> <TD align="right"> -9.10 </TD> <TD align="right"> -76.59 </TD> <TD> Peru </TD> <TD> Huanuco </TD> <TD> Huacaybamba </TD> </TR>
+  <TR> <TD align="right"> 15 </TD> <TD align="right">  15 </TD> <TD align="right"> -5.89 </TD> <TD align="right"> -76.11 </TD> <TD> Peru </TD> <TD> Loreto </TD> <TD> Alto Amazonas </TD> </TR>
+  <TR> <TD align="right"> 16 </TD> <TD align="right">  16 </TD> <TD align="right"> -3.80 </TD> <TD align="right"> -73.32 </TD> <TD> Peru </TD> <TD> Loreto </TD> <TD> Maynas </TD> </TR>
+  <TR> <TD align="right"> 17 </TD> <TD align="right">  17 </TD> <TD align="right"> -3.80 </TD> <TD align="right"> -73.32 </TD> <TD> Peru </TD> <TD> Loreto </TD> <TD> Maynas </TD> </TR>
+  <TR> <TD align="right"> 18 </TD> <TD align="right">  18 </TD> <TD align="right"> -3.80 </TD> <TD align="right"> -73.32 </TD> <TD> Peru </TD> <TD> Loreto </TD> <TD> Maynas </TD> </TR>
+  <TR> <TD align="right"> 19 </TD> <TD align="right">  19 </TD> <TD align="right"> -3.80 </TD> <TD align="right"> -73.32 </TD> <TD> Peru </TD> <TD> Loreto </TD> <TD> Maynas </TD> </TR>
+  <TR> <TD align="right"> 20 </TD> <TD align="right">  20 </TD> <TD align="right"> -3.80 </TD> <TD align="right"> -73.32 </TD> <TD> Peru </TD> <TD> Loreto </TD> <TD> Maynas </TD> </TR>
+   </TABLE>
+
+<p>Similarly for the score table; however, this table contains also the total counts of scores by records and variables. In addition, the maximum score by variable.</p>
+
+<pre><code class="r">ps = profil$scores
+recs = c(1:10, nrow(ps) - 1, nrow(ps))
+cols = c(1:4, ncol(ps))
+xtable(ps[recs, cols])
+</code></pre>
+
+<!-- html table generated in R 3.0.0 by xtable 1.7-1 package -->
+
+<!-- Tue Apr 16 16:05:05 2013 -->
+
+<TABLE border=1>
+<TR> <TH>  </TH> <TH> ID </TH> <TH> Latitude </TH> <TH> Longitude </TH> <TH> Country </TH> <TH> Record.score </TH>  </TR>
+  <TR> <TD align="right"> 1 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 35.00 </TD> </TR>
+  <TR> <TD align="right"> 2 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 35.00 </TD> </TR>
+  <TR> <TD align="right"> 3 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 35.00 </TD> </TR>
+  <TR> <TD align="right"> 4 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 35.00 </TD> </TR>
+  <TR> <TD align="right"> 5 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 35.00 </TD> </TR>
+  <TR> <TD align="right"> 6 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 35.00 </TD> </TR>
+  <TR> <TD align="right"> 7 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 35.00 </TD> </TR>
+  <TR> <TD align="right"> 8 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 35.00 </TD> </TR>
+  <TR> <TD align="right"> 9 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 35.00 </TD> </TR>
+  <TR> <TD align="right"> 10 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 31.00 </TD> </TR>
+  <TR> <TD align="right"> Attribute.score </TD> <TD align="right"> 5259.00 </TD> <TD align="right"> 3490.00 </TD> <TD align="right"> 5243.00 </TD> <TD align="right"> 3506.00 </TD> <TD align="right"> 61055.00 </TD> </TR>
+  <TR> <TD align="right"> Rules.per.variable </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 3.00 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 35.00 </TD> </TR>
+   </TABLE>
+
+<p>A last visualization is a heatmap of the score table to organize similar records and similar rule profiles to help detect any patterns,</p>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAJACAMAAABWh4TIAAAAQlBMVEX9/v0AAAAAZAABZAEREREiIiIzMzNDRENEjURVmFVlZmV2d3aHh4eJt4mYmJipqanKy8rO4c7b3Nvs7ez9/v3////dL2hrAAAAFnRSTlP//////////////////////////wD/v/TSGwAAAAlwSFlzAAALEgAACxIB0t1+/AAAEO9JREFUeJztnYGWo7gRRZfErBP3ZD3Bzv//aixKWpix6EaSMVS/e89mz1liA/2uwRKSVX/cQZI/9j4B2AfEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwobxbfbcV7/4xvwLvFO9vv9wXxoiBeFMSLgnhREC8K4kVBvCiIFwXxoiBeFMSLgnhREC8K4kVBvCiIFwXxoiBeFMSLgnhREC8K4kVBvCiIFwXxoiBeFMSLgnhREC8K4kVBvCiIFwXxoiBeFMSLgnhREC8K4kVBvCiIFwXxoiBeFMSLgnhREC8K4kVBvCiIFwXxoiBeFMSLgnhREC8K4kVBvCiIFwXxohxQ/GZlSKlLOuOI4jc/i3cf6IggXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aJ8P/H85GYV31B829vftMvdQfw+u9wdxO+zy91B/D673B3E77PL3UH8PrvcHcTvs8vdQfw+u9ydI4hveY7y8gczbTt8Cy8x8WbxcBQQL8pbxP8vxz8b+DcEWpwg3jEtThDvGEv3ejpdy50g3jGW7mkYKhr624vvEL8VKeLhXK4F8Y5JEV8qtCDeMRbwteJ6R7xrLOBT1cM8xDumRQviHZMi7iu0IN4xMeFLzbAN4h0zi7gYxDtmFnExiHfMLOJiEO+YWcTFIN4xLVoQ7xgL+KPrPsq1IN4xKeLhVK4F8Y6JCV+54sVIEd94Vq+FBXwa/ykF8Y6xgI869Qrxm9GiBfGOiQnXfMUj3jMx4SvixYgJMyyrRky4R7wYKWHm3Ikxi7gYxDumRQviHWMBD9zq1bCAP/6q0YJ4x1jAfc8jWzH+zphBGi0sYEbn5LCAGZ2To0UL4h1jAQ89U6/EsIDPQ40WxDsmBnzu+I7XIgY80KoXwwL+84Z4MSzgn3Tn1IgBV61njXjHxISHPyu0IN4xMeEfPyq0IN4xMeHzzwotiHdMTLi/VWhBvGOmhMtBvGNatCDeMRbwR9dVtO4Q7xgLmIkYcljA145BGjEs4FPVYraId4wF3HOrV8MCZs6dHC1aEO8YC/h66ismXyHeMRYwjTs5LODTnbpzYljA1+6MeC1SxLeKmRiId4wF/NHRuBOjRQviHZMi7u/lDXvEOyYmHNa5K17rDvGOmUVcPA0H8Y6ZRYx4JWYRI16JWcSIV6JFC+IdkyLuK8bkEe+YmPCjK3caSgdqEO+YWcT34VymBfGOmUV8vxRqQbxjpoivhdc74l0zRXwqXh0B8Y5p0YJ4x6SI+4qK0oh3TEx4HJkrrSiNeMfMIi6uKI14x8wiLi43iXjHTBGX/1Qa8Y6ZIuZZvRQtWhDvmBRxX1FRGvGOiQlfuoqK0oh3zCxiZtkqMYu4uKI04h0zi5hBGiVmETPZUokWLYh3TIq4r6gojXjHxIQfLfryitKId8wUcXlFacQ7ZhYxgzRKTBEzOifFFDGjc1KkiPuKwsKId0xM+NGqLy8sjHjHTBGXFxZGvGOmiMsLCyPeMVPE5YWFEe+YKeLywsKId0yLFsQ7JkXcV1SURrxjYsJh2lVxRWnEO2YWcXFFacQ7ZhZxcUVpxDtmFnFxRWnEO2YWcXGNCsQ7pkUL4h2TIu4rKkoj3jEx4QsTMcSYIi6vKI14x0wRlxcdRLxjpojLK0oj3jFTxMy5k6JFC+IdkyLuKypKI94xMeELjTsxpojLK0oj3jFTxOUVpRHvmFnExRWlEe+YKeLyitKId0yLFsQ7xgIOD29+MDqnhAUcSo/1t9LZloh3TIp4OJfPwUG8Y1LEl4rJV4h3jAUcSo/1txtP7nSwgEPpMYoRSdGiBfGOsYBtLL7wTo94z1jAYyVpli1XIkUcKkkjXogU8eWOeCksYKskjXghLGCrJI14IVq0IN4xFnDozjG9WgoLOHTnxi5dEYh3TIo4dOeGc5kWxDsmRXyJ/ysB8Y6xgEN37lp4vSPeNRZw6M6dKEakhAUcWvQMy0phAVuLfuBn0jqkiB8t+itXvBAp4tCiLy0gj3jHWMChRc/iR1JYwKFFzyNbKVq0IN4xFvB4tZd+xSPeMxbw2J27Il6IFPGjO8dkSyVSxI/uXI94ISzgcYCGZ/VKWMDMuZOjRQviHWMBh+4c1aSlsIBDd45q0lKkiIcz1aSlSBFfqCathQUcunNUk5bCAg7dOapJS9GiBfGOsYBDd45q0lJYwOPoHNWklUgRD2eqSUuRIr5QTVoLC3gcnaOatBIW8Dg6RzVpJVq0IN4xFnD87Rzr1etgAY8rYvCDCiVSxMOZatJSpIgvFBzUwgIe16vnVq+EBcxv5+Ro0YJ4x1jAtsAhBQeFsIBjd47GnQ4p4uFMNWkpUsQXqklrYQHb4oZUkxbCArbyYzTuhGjRgnjHWMBhVUuqSUuRIh5OVJOWIiZ8fXzFU1RYiRTxrWJlBMQ7xgIOkzCoJi2FBcyy5XK0aEG8Yyxgu9qpJi1Eing4scChFDHhsUgB4oVIEd9Y504LC9jm1CNeCAvYJloiXggLOLTq6cdLkSIOpccoPyZETDi06ik/pkSKOLTqKT8mhAUcWvX8WlYKC9h+UMFPqIRo0YJ4x1jAY1eO8mNKpIgfXTnKjykREw5dOUbnlEgRP+7zlB9TwgIeu3KUH1PCAmaQRo4WLYh3jAUcunMDt3olUsTD6eOvUi2Id0xM+NGd63se2QqRIh4f2zFIo4MFzOicHBYwo3NytGhBvGMs4LE7RzVpJVLEw4lq0lLEhMOKGFSTViJFfOuoJi2FBRy6clSTlsICDl05qklL0aIF8Y6xgONv51jgUIcU8cAjWy1iwo/uHOXHpEgR36hQoYUFPC5wyK1eCQuY0Tk5WrQg3jEWcOjOUX5MihTx2J2jcadDTPjRnaP8mBQp4ltH+TEpLGB7akf5MSEsYFuvnsadEC1aEO+YmPCtu1N+TIqY8LW7U35MipjwpbtThUqKmHCPeDFSwl1H+TEppohZtlyKFi2Id0xMePx5POXHhIgJh1UtWeBQiZjwKB3xQsSEe8SLkRKuqCKOeM/MIka8EjHhR6ueWbZSxIQfrfrTwNQrIWLCY6t+OJdpQbxjYsJjq/5SqAXxjkkJd9218HpHvGumiE+sXq1EixbEOyYmfGNYVoyY8Fh6jGrSQsSEQ3eOatJKxITH7hzVpIVICXcdix9JMUXMs3opWrQg3jEx4fD1TjVpJWLC1+5ONWkpYsIXJluKERMO3TmqSSuREu46qklLMYuYOXdKtGhBvGNiwo+uHNWkpYgJP7pyVJOWIib86MpRTVqKmLB15Rik0SElzOicGFPEjM5J0aIF8Y6JCYfuHNWklYgJP7pzVJOWIiYcFjikmrQSMeGwwCHVpJVICXcd1aSlmCKmmrQULVoQ75iY8K1iHgbiPRMTDhMtS5erR7xnYsJhouWPwgIViPdMTDiMzp1/FmpBvGNSwl2oTVKoBfGOmUVc2rZDvGdatCDeMTFhWwqF8mM6xITDypbMwFEiJvzozl07RueEiAn34xVPFSodUsJd13OrV2KKmMmWUsSEx/XqKSMuREz4Wvsd320L4rciOrwE8TWFCoof9xWB+M2ICfehO3dGvA4p4XBXvVXUj0e8U6aIP7qaxh3indKiBfGOsYDDahg/qgZpEO8UCzishtHfSifdId4xFnBYDaN8Ksb24u+I34q/Az4hXgpLN4zF97dbzZO7l5v+jf/m+EcD/3k1/3KJpRsGaOqKESHetfg6EO9efLji6xY4RLxr8aGSdN0Ch5t35xC/DSni4Vy3wCHinYsfK0lXTL1CvGvxoZJ03fRqxLsWHypJ1825Q7xr8XUg/huI7+8HHZ1D/DbEhMOy5cccnUP8NkwRH3GQBvGbMUWMeFHxRxydQ/xmTBEfcXQO8ZvRogXx7sWHq50HOILi7/fhFEboyrS85bdziN+G6PAavt+Hc7n4bUH8ZqSIb10coSsA8e7Fh5G5a+H1jvhvID407E5VU6+2BfGb0aIF8e7Fh+5c8QWPeP/iQ3fuiOvV3xG/FTHe0J074Hr1d8RvRcr30Z074Hr1d8RvhaU7TrQ84Hr1sDHjc/oDrlcPhwTxoiBeFMSLgnhR3ix+819kv+0g+x35NQd5t/ju6any39M1ft+ae/fzX53fltld5iArd7h0KtnNz0d+fuG4YZW/3AlWFJLNcIhbfeZvy23t7s8x5LaN259f+LzHdTvMzVnvlou9/Xrk3Auz2/If/4W/LvuhK+OY4rvs5tXixwR/v2yrd1gi/unIC+KfD5z3mxWf+/OKebf4/L0rv2HFLTy7LZ/Jyjc/b1sQnz3B571ltnd2mK/euniC2VeW8vbGXeYb9Pkmt/CVvA/Zk8l/S2e25u802XevPZ/aN/7C/uJbd5jZtvpD89pP12ILsn7b4mHqznDG+2/1tee82Ppf2STKvnDdQZbO5nlr7pXV2za97x2jcbeyi3dfd5/LN/iyL8xv+/og2e/4buFjuP7Aq05mbQyfs8MDnOq/pOAvXtfiq/90LTTu8qey8j617mRedRt4q/ilL8H7+gyzu1x97MyB1xwk86L8+197q184GaeNu9zGxg9xdY+g9ZDVncvV4rfjCLf6V+y07o31n7flt1bf1t/bFznCrb7o7Zlt1W9ued3iu6vfm9/d2udTpRzhVv/iHSw9W3l+FLskeednK1/s06X4Zr5u9y62u9Y/Oqr8dOU+Sbmb3NptCyfjsFXfeNLP781GOPv376/ObfzyINlTWTxI9qVr+ozZbZs9v/mGj2wLnBS9cM1BmiRXn0wVnsSvjKvsrvLCBzhLjylqhwUXTsblrf6+cMNd9b6FNu7aG27+wJUPAfIve+0V+8nJeBRfz7p+89KLunWS2yJdmjBTuW3xZPyJb3hkstSrXdU7z4gvOMhalm7Nzy9cNwNk6avjBXcWb/343A7XtcJXiS848NKzlacv/txHYd22LfEufvWB13pf27j+ZDrcV7tb36bfsKXvrR+fnb7ceFJPh6gXn9tj9RW/dDJyt3r7/P/+uOYNc7mWXrrutY3duefXLf0fRSD+192tvuKX357b3rAt+yJ/4puapF3+fth2Sq9m8xaky1u9D9Z1E1qeK6w+kc3a+ruIf+W9+bW7u6+8nrKPbF/VxZ4fBvHj+9YPZtayspOwIH4Dqucaf4En8dXNobJDHEv8Vkf2Lr5ph7k9rR30yT5SePX9Z9xr7j/FxC/G+uKWdP1776+/DSD+fTt87SBNI9n7Svtu3z46t8kX42G68hs8Vfgerfq2S2Ix1sOIfynbtBkinsS/56GJCH5+Jp0Tv+k1UcOxzuYzXD2yPXyqBz+9Oe/9CdWrmqSb7bCR45zJl7i64u9Hj/ZYH8NPQbwofmbZxvdndtiyP1k8zcDJ7WCLZ2UN+PkY+hG//PuH42R9rLP5FFdTrxb2+NL9NYF4VQ71MfwUxIvi/FbfrZ7dDr/i6ffxud3Ff46Bo694xL+Q/SbiVeBnYYTsvhBfi/PG3eofwb4DxKviaIxml1a9l2y+NbtMvcL8/iBelD3m3OH9ANC4E8XPsCy8FOfP6qEWbvWiIF6U94rnTn8Y3vyDiunfsC+IFwXxoiBeFBp3otCdEwXxoiBeFMSLgnhREC8K4kVBvCiIFwXxoiBeFMSLgnhREC8K4kVBvCiIFwXxoiBeFMSL8n/pAC/hNUeSIAAAAABJRU5ErkJggg==" alt="plot of chunk unnamed-chunk-7"/> </p>
+
+<h2>Checking tables with data <em>inconsistencies</em></h2>
+
+<p>For comparative purposes we purposely introduce a few errors in our table as below. We also exclude a rule on soil types for better display.</p>
+
+<pre><code class="r">atable$P[1] = -100
+atable$pH[11] = -200
+srule1 = srules[-c(33), ]
+profil = datadict.profile(atable, srule1)
+</code></pre>
+
+<p>To get a better handle on the data it is always informative to review simple descriptive
+summaries of the data. A custom summary function is included in the package to display this summary in tabular form:</p>
+
+<pre><code class="r">xtable(shortSummary(atable))
+</code></pre>
+
+<!-- html table generated in R 3.0.0 by xtable 1.7-1 package -->
+
+<!-- Tue Apr 16 16:05:06 2013 -->
+
+<TABLE border=1>
+<TR> <TH>  </TH> <TH> n </TH> <TH> missing </TH> <TH> unique </TH> <TH> value </TH> <TH> min </TH> <TH> max </TH> <TH> Mean </TH> <TH> sd </TH> <TH> .05 </TH> <TH> .10 </TH> <TH> .25 </TH> <TH> .50 </TH> <TH> .75 </TH> <TH> .90 </TH> <TH> .95 </TH>  </TR>
+  <TR> <TD align="right"> ID </TD> <TD> 1753 </TD> <TD> 0 </TD> <TD> 1753 </TD> <TD>  </TD> <TD> 1 </TD> <TD> 1753 </TD> <TD> 877 </TD> <TD> 506.19 </TD> <TD>   88.6 </TD> <TD>  176.2 </TD> <TD>  439.0 </TD> <TD>  877.0 </TD> <TD> 1315.0 </TD> <TD> 1577.8 </TD> <TD> 1665.4 </TD> </TR>
+  <TR> <TD align="right"> Latitude </TD> <TD> 1737 </TD> <TD> 16 </TD> <TD> 168 </TD> <TD>  </TD> <TD> -18.2976 </TD> <TD> -3.6159 </TD> <TD> -12.28 </TD> <TD> 3.23 </TD> <TD> -18.182 </TD> <TD> -15.884 </TD> <TD> -15.833 </TD> <TD> -12.070 </TD> <TD> -11.130 </TD> <TD>  -7.157 </TD> <TD>  -5.894 </TD> </TR>
+  <TR> <TD align="right"> Longitude </TD> <TD> 1737 </TD> <TD> 16 </TD> <TD> 169 </TD> <TD>  </TD> <TD> -80.823 </TD> <TD> -69.0654 </TD> <TD> -74.6 </TD> <TD> 2.71 </TD> <TD> -77.61 </TD> <TD> -76.95 </TD> <TD> -76.95 </TD> <TD> -75.35 </TD> <TD> -72.10 </TD> <TD> -70.03 </TD> <TD> -70.03 </TD> </TR>
+  <TR> <TD align="right"> Country </TD> <TD> 1753 </TD> <TD> 0 </TD> <TD> 1 </TD> <TD> Peru </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> </TR>
+  <TR> <TD align="right"> Adm1 </TD> <TD> 1753 </TD> <TD> 0 </TD> <TD> 22 </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> </TR>
+  <TR> <TD align="right"> Adm2 </TD> <TD> 1743 </TD> <TD> 10 </TD> <TD> 58 </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> </TR>
+  <TR> <TD align="right"> Adm3 </TD> <TD> 1738 </TD> <TD> 15 </TD> <TD> 110 </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> </TR>
+  <TR> <TD align="right"> pH </TD> <TD> 1751 </TD> <TD> 2 </TD> <TD> 333 </TD> <TD>  </TD> <TD> -200 </TD> <TD> 10.46 </TD> <TD> 6.361 </TD> <TD> 5.12 </TD> <TD> 4.100 </TD> <TD> 4.510 </TD> <TD> 5.200 </TD> <TD> 7.100 </TD> <TD> 7.600 </TD> <TD> 7.900 </TD> <TD> 8.185 </TD> </TR>
+  <TR> <TD align="right"> Conductivity </TD> <TD> 1752 </TD> <TD> 1 </TD> <TD> 443 </TD> <TD>  </TD> <TD> 0.02 </TD> <TD> 42.4 </TD> <TD> 1.571 </TD> <TD> 2.51 </TD> <TD> 0.08 </TD> <TD> 0.11 </TD> <TD> 0.21 </TD> <TD> 0.52 </TD> <TD> 2.34 </TD> <TD> 3.95 </TD> <TD> 5.25 </TD> </TR>
+  <TR> <TD align="right"> CaCO3 </TD> <TD> 1752 </TD> <TD> 1 </TD> <TD> 190 </TD> <TD>  </TD> <TD> 0 </TD> <TD> 94.8 </TD> <TD> 1.722 </TD> <TD> 6.69 </TD> <TD>  0.000 </TD> <TD>  0.000 </TD> <TD>  0.000 </TD> <TD>  0.000 </TD> <TD>  0.380 </TD> <TD>  3.393 </TD> <TD> 10.100 </TD> </TR>
+  <TR> <TD align="right"> Organic_matter </TD> <TD> 1752 </TD> <TD> 1 </TD> <TD> 370 </TD> <TD>  </TD> <TD> 0.03 </TD> <TD> 50.9 </TD> <TD> 2.336 </TD> <TD> 3.71 </TD> <TD> 0.290 </TD> <TD> 0.500 </TD> <TD> 0.890 </TD> <TD> 1.500 </TD> <TD> 2.400 </TD> <TD> 4.210 </TD> <TD> 6.918 </TD> </TR>
+  <TR> <TD align="right"> P </TD> <TD> 1752 </TD> <TD> 1 </TD> <TD> 453 </TD> <TD>  </TD> <TD> -100 </TD> <TD> 503.7 </TD> <TD> 19.36 </TD> <TD> 25.57 </TD> <TD>  2.80 </TD> <TD>  3.70 </TD> <TD>  6.00 </TD> <TD> 13.20 </TD> <TD> 22.30 </TD> <TD> 46.48 </TD> <TD> 58.90 </TD> </TR>
+  <TR> <TD align="right"> Sand </TD> <TD> 1687 </TD> <TD> 66 </TD> <TD> 73 </TD> <TD>  </TD> <TD> 0 </TD> <TD> 100 </TD> <TD> 54.97 </TD> <TD> 16.29 </TD> <TD> 26.0 </TD> <TD> 33.2 </TD> <TD> 46.0 </TD> <TD> 54.0 </TD> <TD> 66.0 </TD> <TD> 76.0 </TD> <TD> 82.0 </TD> </TR>
+  <TR> <TD align="right"> Lime </TD> <TD> 1686 </TD> <TD> 67 </TD> <TD> 58 </TD> <TD>  </TD> <TD> 0 </TD> <TD> 74 </TD> <TD> 29.01 </TD> <TD> 9.82 </TD> <TD> 12 </TD> <TD> 18 </TD> <TD> 24 </TD> <TD> 28 </TD> <TD> 35 </TD> <TD> 40 </TD> <TD> 44 </TD> </TR>
+  <TR> <TD align="right"> Clay </TD> <TD> 1686 </TD> <TD> 67 </TD> <TD> 54 </TD> <TD>  </TD> <TD> 0 </TD> <TD> 76 </TD> <TD> 16.01 </TD> <TD> 10.25 </TD> <TD>  2 </TD> <TD>  4 </TD> <TD>  8 </TD> <TD> 16 </TD> <TD> 20 </TD> <TD> 28 </TD> <TD> 36 </TD> </TR>
+  <TR> <TD align="right"> Soil_texture </TD> <TD> 1692 </TD> <TD> 61 </TD> <TD> 12 </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> <TD>  </TD> </TR>
+  <TR> <TD align="right"> Altitude </TD> <TD> 1753 </TD> <TD> 0 </TD> <TD> 157 </TD> <TD>  </TD> <TD> -9999 </TD> <TD> 4417 </TD> <TD> 1661 </TD> <TD> 1940.9 </TD> <TD>   78 </TD> <TD>   78 </TD> <TD>  235 </TD> <TD>  839 </TD> <TD> 3299 </TD> <TD> 3846 </TD> <TD> 3846 </TD> </TR>
+   </TABLE>
+
+<p>A summary of the results by rule can be seen from the profil object:</p>
+
+<pre><code class="r">xtable(profil$checks)
+</code></pre>
+
+<!-- html table generated in R 3.0.0 by xtable 1.7-1 package -->
+
+<!-- Tue Apr 16 16:05:06 2013 -->
+
+<TABLE border=1>
+<TR> <TH>  </TH> <TH> Variable </TH> <TH> Type </TH> <TH> Rule </TH> <TH> Comment </TH> <TH> Execution </TH> <TH> Error.sum </TH> <TH> Error.list </TH>  </TR>
+  <TR> <TD align="right"> 1 </TD> <TD> ID </TD> <TD> integer </TD> <TD> sapply(ID, is.integer) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 2 </TD> <TD> ID </TD> <TD> integer </TD> <TD> !duplicated(ID) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 3 </TD> <TD> ID </TD> <TD> integer </TD> <TD> ID &gt  0 &amp  ID &lt  1754 </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 4 </TD> <TD> Latitude </TD> <TD> numeric </TD> <TD> sapply(Latitude, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 5 </TD> <TD> Latitude </TD> <TD> numeric </TD> <TD> Latitude &lt  0 </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 6 </TD> <TD> Longitude </TD> <TD> numeric </TD> <TD> sapply(Longitude, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 7 </TD> <TD> Longitude </TD> <TD> numeric </TD> <TD> Longitude &lt  180 &amp  Longitude &gt  -180 </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 8 </TD> <TD> Longitude </TD> <TD> numeric </TD> <TD> is.null(Longitude) == is.null(Latitude) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 9 </TD> <TD> Adm1 </TD> <TD> character </TD> <TD> sapply(Adm1, is.character) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 10 </TD> <TD> Adm2 </TD> <TD> character </TD> <TD> sapply(Adm2, is.character) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 11 </TD> <TD> Adm3 </TD> <TD> character </TD> <TD> sapply(Adm3, is.character) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 12 </TD> <TD> Country </TD> <TD> character </TD> <TD> sapply(Country, is.character) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 13 </TD> <TD> Altitude </TD> <TD> integer </TD> <TD> sapply(Altitude, is.integer) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 14 </TD> <TD> Adm1 </TD> <TD> character </TD> <TD> is.null(Adm1) == is.null(Longitude) </TD> <TD>  </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 15 </TD> <TD> Adm2 </TD> <TD> character </TD> <TD> is.null(Adm2) == is.null(Longitude) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 16 </TD> <TD> Adm3 </TD> <TD> character </TD> <TD> is.null(Adm3) == is.null(Longitude) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 17 </TD> <TD> Country </TD> <TD> character </TD> <TD> is.null(Country) == is.null(Longitude) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 18 </TD> <TD> Altitude </TD> <TD> integer </TD> <TD> is.null(Altitude) == is.null(Longitude) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 19 </TD> <TD> pH </TD> <TD> numeric </TD> <TD> sapply(pH, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 20 </TD> <TD> pH </TD> <TD> numeric </TD> <TD> pH &gt = 0 </TD> <TD> pH bigger than </TD> <TD> ok </TD> <TD align="right">   1 </TD> <TD> 11 </TD> </TR>
+  <TR> <TD align="right"> 21 </TD> <TD> pH </TD> <TD> numeric </TD> <TD> pH &lt = 14 </TD> <TD> pH lesser than </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 22 </TD> <TD> Conductivity </TD> <TD> numeric </TD> <TD> sapply(Conductivity, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 23 </TD> <TD> Conductivity </TD> <TD> numeric </TD> <TD> Conductivity &gt = 0 </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 24 </TD> <TD> CaCO3 </TD> <TD> numeric </TD> <TD> sapply(CaCO3, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 25 </TD> <TD> CaCO3 </TD> <TD> numeric </TD> <TD> CaCO3 &gt = 0 </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 26 </TD> <TD> Sand </TD> <TD> numeric </TD> <TD> sapply(Sand, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 27 </TD> <TD> Sand </TD> <TD> numeric </TD> <TD> sapply(Sand, is.withinRange, 0, 100) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 28 </TD> <TD> Lime </TD> <TD> numeric </TD> <TD> sapply(Lime, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 29 </TD> <TD> Lime </TD> <TD> numeric </TD> <TD> sapply(Lime, is.withinRange, 0, 100) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 30 </TD> <TD> Clay </TD> <TD> numeric </TD> <TD> sapply(Clay, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 31 </TD> <TD> Clay </TD> <TD> numeric </TD> <TD> sapply(Clay, is.withinRange, 0, 100) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 32 </TD> <TD> Soil_texture </TD> <TD> character </TD> <TD> sapply(Soil_texture, is.character) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 34 </TD> <TD> P </TD> <TD> numeric </TD> <TD> sapply(P, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 35 </TD> <TD> P </TD> <TD> numeric </TD> <TD> P &gt = 0 </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   1 </TD> <TD> 1 </TD> </TR>
+   </TABLE>
+
+<p>The <em>checks</em> part lists all erroneous records in the last column for each rule. This may be too long for printing. To this end a custom print report function only displays the first n records where n=5 is the default. </p>
+
+<pre><code class="r">atable$Sand[20:30] = -1
+profil = datadict.profile(atable, srule1)
+</code></pre>
+
+<pre><code class="r">
+xtable(prep4rep(profil$checks))
+</code></pre>
+
+<!-- html table generated in R 3.0.0 by xtable 1.7-1 package -->
+
+<!-- Tue Apr 16 16:05:06 2013 -->
+
+<TABLE border=1>
+<TR> <TH>  </TH> <TH> Variable </TH> <TH> Type </TH> <TH> Rule </TH> <TH> Comment </TH> <TH> Execution </TH> <TH> Error.sum </TH> <TH> Error.list </TH>  </TR>
+  <TR> <TD align="right"> 1 </TD> <TD> ID </TD> <TD> integer </TD> <TD> sapply(ID, is.integer) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 2 </TD> <TD> ID </TD> <TD> integer </TD> <TD> !duplicated(ID) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 3 </TD> <TD> ID </TD> <TD> integer </TD> <TD> ID &gt  0 &amp  ID &lt  1754 </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 4 </TD> <TD> Latitude </TD> <TD> numeric </TD> <TD> sapply(Latitude, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 5 </TD> <TD> Latitude </TD> <TD> numeric </TD> <TD> Latitude &lt  0 </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 6 </TD> <TD> Longitude </TD> <TD> numeric </TD> <TD> sapply(Longitude, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 7 </TD> <TD> Longitude </TD> <TD> numeric </TD> <TD> Longitude &lt  180 &amp  Longitude &gt  -180 </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 8 </TD> <TD> Longitude </TD> <TD> numeric </TD> <TD> is.null(Longitude) == is.null(Latitude) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 9 </TD> <TD> Adm1 </TD> <TD> character </TD> <TD> sapply(Adm1, is.character) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 10 </TD> <TD> Adm2 </TD> <TD> character </TD> <TD> sapply(Adm2, is.character) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 11 </TD> <TD> Adm3 </TD> <TD> character </TD> <TD> sapply(Adm3, is.character) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 12 </TD> <TD> Country </TD> <TD> character </TD> <TD> sapply(Country, is.character) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 13 </TD> <TD> Altitude </TD> <TD> integer </TD> <TD> sapply(Altitude, is.integer) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 14 </TD> <TD> Adm1 </TD> <TD> character </TD> <TD> is.null(Adm1) == is.null(Longitude) </TD> <TD>  </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 15 </TD> <TD> Adm2 </TD> <TD> character </TD> <TD> is.null(Adm2) == is.null(Longitude) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 16 </TD> <TD> Adm3 </TD> <TD> character </TD> <TD> is.null(Adm3) == is.null(Longitude) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 17 </TD> <TD> Country </TD> <TD> character </TD> <TD> is.null(Country) == is.null(Longitude) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 18 </TD> <TD> Altitude </TD> <TD> integer </TD> <TD> is.null(Altitude) == is.null(Longitude) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 19 </TD> <TD> pH </TD> <TD> numeric </TD> <TD> sapply(pH, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 20 </TD> <TD> pH </TD> <TD> numeric </TD> <TD> pH &gt = 0 </TD> <TD> pH bigger than </TD> <TD> ok </TD> <TD align="right">   1 </TD> <TD> 11 </TD> </TR>
+  <TR> <TD align="right"> 21 </TD> <TD> pH </TD> <TD> numeric </TD> <TD> pH &lt = 14 </TD> <TD> pH lesser than </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 22 </TD> <TD> Conductivity </TD> <TD> numeric </TD> <TD> sapply(Conductivity, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 23 </TD> <TD> Conductivity </TD> <TD> numeric </TD> <TD> Conductivity &gt = 0 </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 24 </TD> <TD> CaCO3 </TD> <TD> numeric </TD> <TD> sapply(CaCO3, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 25 </TD> <TD> CaCO3 </TD> <TD> numeric </TD> <TD> CaCO3 &gt = 0 </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 26 </TD> <TD> Sand </TD> <TD> numeric </TD> <TD> sapply(Sand, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 27 </TD> <TD> Sand </TD> <TD> numeric </TD> <TD> sapply(Sand, is.withinRange, 0, 100) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">  11 </TD> <TD> 20,21,22,23,24 &hellip; more </TD> </TR>
+  <TR> <TD align="right"> 28 </TD> <TD> Lime </TD> <TD> numeric </TD> <TD> sapply(Lime, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 29 </TD> <TD> Lime </TD> <TD> numeric </TD> <TD> sapply(Lime, is.withinRange, 0, 100) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 30 </TD> <TD> Clay </TD> <TD> numeric </TD> <TD> sapply(Clay, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 31 </TD> <TD> Clay </TD> <TD> numeric </TD> <TD> sapply(Clay, is.withinRange, 0, 100) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 32 </TD> <TD> Soil_texture </TD> <TD> character </TD> <TD> sapply(Soil_texture, is.character) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 34 </TD> <TD> P </TD> <TD> numeric </TD> <TD> sapply(P, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 35 </TD> <TD> P </TD> <TD> numeric </TD> <TD> P &gt = 0 </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   1 </TD> <TD> 1 </TD> </TR>
+   </TABLE>
+
+<h2>Using rules that can&#39;t be executed</h2>
+
+<p>This may happen if the syntax is wrong. Another reason - particularly if re-using rule files across tables - maybe that a particular variable name is not present amongst the column names of the present table. The tool will just ignore it and report a &#39;failed&#39; execution. Let us simply modify an existing rule as below:</p>
+
+<pre><code class="r">srule1$Variable[25] = &quot;caCO3&quot;
+srule1$Rule[25] = &quot;caCO3 &gt;= 0&quot;
+profil = datadict.profile(atable, srule1)
+</code></pre>
+
+<p>Now let us just look at an excerpt of the results table:</p>
+
+<pre><code class="r">xtable(prep4rep(profil$checks[20:30, ]))
+</code></pre>
+
+<!-- html table generated in R 3.0.0 by xtable 1.7-1 package -->
+
+<!-- Tue Apr 16 16:05:06 2013 -->
+
+<TABLE border=1>
+<TR> <TH>  </TH> <TH> Variable </TH> <TH> Type </TH> <TH> Rule </TH> <TH> Comment </TH> <TH> Execution </TH> <TH> Error.sum </TH> <TH> Error.list </TH>  </TR>
+  <TR> <TD align="right"> 20 </TD> <TD> pH </TD> <TD> numeric </TD> <TD> pH &gt = 0 </TD> <TD> pH bigger than </TD> <TD> ok </TD> <TD align="right">   1 </TD> <TD> 11 </TD> </TR>
+  <TR> <TD align="right"> 21 </TD> <TD> pH </TD> <TD> numeric </TD> <TD> pH &lt = 14 </TD> <TD> pH lesser than </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 22 </TD> <TD> Conductivity </TD> <TD> numeric </TD> <TD> sapply(Conductivity, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 23 </TD> <TD> Conductivity </TD> <TD> numeric </TD> <TD> Conductivity &gt = 0 </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 24 </TD> <TD> CaCO3 </TD> <TD> numeric </TD> <TD> sapply(CaCO3, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 25 </TD> <TD> caCO3 </TD> <TD> numeric </TD> <TD> caCO3 &gt = 0 </TD> <TD> None </TD> <TD> failed </TD> <TD align="right">   0 </TD> <TD> NA </TD> </TR>
+  <TR> <TD align="right"> 26 </TD> <TD> Sand </TD> <TD> numeric </TD> <TD> sapply(Sand, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 27 </TD> <TD> Sand </TD> <TD> numeric </TD> <TD> sapply(Sand, is.withinRange, 0, 100) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">  11 </TD> <TD> 20,21,22,23,24 &hellip; more </TD> </TR>
+  <TR> <TD align="right"> 28 </TD> <TD> Lime </TD> <TD> numeric </TD> <TD> sapply(Lime, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 29 </TD> <TD> Lime </TD> <TD> numeric </TD> <TD> sapply(Lime, is.withinRange, 0, 100) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+  <TR> <TD align="right"> 30 </TD> <TD> Clay </TD> <TD> numeric </TD> <TD> sapply(Clay, is.numeric) </TD> <TD> None </TD> <TD> ok </TD> <TD align="right">   0 </TD> <TD> none </TD> </TR>
+   </TABLE>
+
+<p><em>End of tutorial</em></p>
+
+</body>
+
+</html>
