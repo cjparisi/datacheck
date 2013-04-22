@@ -2,7 +2,7 @@
 \alias{heatmap.quality}
 \title{Draws a heatmap based on data quality scores}
 \usage{
-  heatmap.quality(profile, recLab = NULL, recMax = 50,
+  heatmap.quality(profile, recLab = NULL, recMax = 100,
     scoreMax = NULL, cols = NULL, ...)
 }
 \arguments{
@@ -23,6 +23,10 @@
   Knows to extract the quality matrix from the profile
   object and pass it on to the heatmap function. Plots a
   heatmap.
+}
+\details{
+  Currently this function is limited a table size of 300
+  records.
 }
 \author{
   Reinhard Simon

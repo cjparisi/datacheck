@@ -1,5 +1,16 @@
+datacheck 0.9.8
+=================
+* removed demo directory
+
+datacheck 0.9.7
+===============
+* switched from required() to library()
+* reduced size of a sample file
+* removed obsolete file
+* update documentation
+
 datacheck 0.9.6
-============
+===============
 
 * Initial release
 * Primary functions:

@@ -2,6 +2,8 @@
 %\VignetteEngine{knitr}
 %\VignetteIndexEntry{A Vignette for datacheck package}
 -->
+
+
 ```{r setup,echo=FALSE, results='hide', message=FALSE}
 library(xtable)
 library(datacheck)

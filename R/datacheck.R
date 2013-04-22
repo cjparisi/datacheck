@@ -35,12 +35,12 @@
 #' @docType package
 NA
 
+library(grDevices)
 library(testthat)
-require(xtable)
-require(stringr)
-require(Hmisc)
-require(grDevices)
-require(shiny)
+library(xtable)
+library(stringr)
+library(Hmisc)
+library(shiny)
 
 #' Tests for presence of most common punctuation characters
 #'
@@ -246,15 +246,18 @@ as.rules <- function(lines = "") {
     hasVar = res$Variable == vn[j]
     for (i in 1:nrow(res)) {
       hasTypeI = str_detect(res$Rule[i], "is.integer") & res$Variable[i] == vn[j]
-      hasTypeD = str_detect(res$Rule[i], "is.numeric") & res$Variable[i] == vn[j]
+      hasTypeD = str_detect(res$Rule[i], "is.double")  & res$Variable[i] == vn[j]
+      hasTypeN = str_detect(res$Rule[i], "is.numeric") & res$Variable[i] == vn[j]
       hasTypeL = str_detect(res$Rule[i], "is.logical") & res$Variable[i] == vn[j]
       
       if (any(hasTypeI)) 
         res[hasVar, "Type"] = "integer"
       if (any(hasTypeD)) 
-        res[hasVar, "Type"] = "numeric"
+        res[hasVar, "Type"] = "double"
       if (any(hasTypeL)) 
         res[hasVar, "Type"] = "logical"
+      if (any(hasTypeN)) 
+        res[hasVar, "Type"] = "numeric"
     }
   }
   
@@ -311,8 +314,8 @@ is.data.rules <- function(x) {
 #' should be short. A rule must only test one variable and one aspect at a time.
 #'
 #' @aliases datadict.profile
-#' @param atable a path to a table in .csv format
-#' @param adictionary a path to a list of rules in .R format
+#' @param atable a data.frame
+#' @param adictionary a list of rules in rule format
 #' @author Reinhard Simon
 #' @return a data.profile object or NA
 #' @family datadict
@@ -499,6 +502,8 @@ pkg.version <- function(pkg) {
 #'
 #' Knows to extract the quality matrix from the profile object and pass it on to the heatmap function.
 #' Plots a heatmap.
+#' 
+#' Currently this function is limited a table size of 300 records.
 #'
 #' @param profile a datadict.profile object
 #' @param recLab variable that should be used for labeling the records
@@ -510,8 +515,9 @@ pkg.version <- function(pkg) {
 #' @author Reinhard Simon
 #' @family visuals
 #' @export
-heatmap.quality = function(profile, recLab = NULL, recMax = 50, scoreMax = NULL, cols = NULL, ...) {
+heatmap.quality = function(profile, recLab = NULL, recMax = 100, scoreMax = NULL, cols = NULL, ...) {
   stopifnot(is.datadict.profile(profile))
+  stopifnot(nrow(profile$data) <= 300)
   
   if(is.null(cols)){
     cols <- colorRampPalette(c("white", "darkgreen"))(max(profile$scores))  

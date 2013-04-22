@@ -5,10 +5,9 @@
   datadict.profile(atable, adictionary)
 }
 \arguments{
-  \item{atable}{a path to a table in .csv format}
+  \item{atable}{a data.frame}
 
-  \item{adictionary}{a path to a list of rules in .R
-  format}
+  \item{adictionary}{a list of rules in rule format}
 }
 \value{
   a data.profile object or NA

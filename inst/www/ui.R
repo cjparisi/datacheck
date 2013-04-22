@@ -29,6 +29,9 @@ shinyUI(pageWithSidebar(
   mainPanel(
     #verbatimTextOutput("summary"),
     tabsetPanel(
+      tabPanel("Vignette", list(
+        div(id = "vignette", includeMarkdown(system.file("doc/index.md", package = "datacheck")))
+      )),
       tabPanel("Table",list(
         div(id='progress',includeHTML("js/timer.js")),
         tableOutput("view")))
