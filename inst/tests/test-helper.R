@@ -86,6 +86,7 @@ test_that("is.oneOf works",{
 context("datacheck helper function: is.withinRange")
 
 test_that("is.withinRange works",{
+  expect_that( is.withinRange(2,2,3)    , is_true() )
   expect_that( is.withinRange(2,1,3)    , is_true() )
   expect_that( is.withinRange(1,1,3)    , is_true() )
   expect_that( is.withinRange(3,1,3)    , is_true() )
@@ -128,6 +129,7 @@ test_that("Reading a file works",{
   
                     
   expect_that( is.na(read.rules("")), is_true())
+  
   expect_that( is.na(read.rules(NA)),  is_true())
   expect_that( (nrow(read.rules(apath)) > 0), is_true())
   
@@ -167,6 +169,6 @@ test_that("Rule profiling works",{
 context("Testing: pkg.version")
 
 test_that("Access works",{
-  expect_that( pkg.version("datacheck") == "0.9.8", is_true() )
+  expect_that( pkg.version("datacheck") == "1.0.0", is_true() )
 })
 

@@ -1,48 +1,50 @@
+# load dataset soils
+library(datacheck)
+
+soil1 = read.csv(system.file("examples/soilsamples.csv", package="datacheck"))
+recname = paste("Name",1:nrow(soil1),sep="_")
+soil2 = cbind(recname,soil1)
+soil2$ID[26:35]= - 123
+soil2$Latitude[7:11] = 123
 
 
+rule1=readLines(system.file("examples/soil_rules.R", package="datacheck"))
+rule2=c("","sapply(recname, is.character)","!duplicated(recname)", rule1)
+
+prof1 = datadict.profile(soil1, as.rules(rule1))
+prof2 = datadict.profile(soil2, as.rules(rule2))
+
+#############################################
 shinyServer(function(input, output) {
   
   # Return the requested dataset
   datasetInput <- reactive({
-    dp = input$dataset$datapath
-    if(!is.null(dp) ) {
-      res = read.csv(dp, header = TRUE, stringsAsFactors = FALSE)  
-    } else {
-      res = as.data.frame(matrix("No table loaded."))
-    }
-    return(res)
+    switch(input$dataset,
+           "Soil_1" = soil1,
+           "Soil_2" = soil2)
   })
   
-  rulesetInput <- reactive({
-    dp = input$ruleset$datapath
-    print(dp)
-    if(!is.null(dp)) {
-      res = readLines(dp)
-    } else {
-      res = "NA"
-    }
-    return(res)
-  })
-
   profileInput <- reactive({
-    x = as.rules(rulesetInput())
-    z = datadict.profile(datasetInput(), x)
-    z
+    switch(input$dataset,
+           "Soil_1" = prof1,
+           "Soil_2" = prof2)
   })
+  
   
   output$recLabels = renderUI({
     cn = names(datasetInput())
-    if(length(cn)>1){
-     un = rep(FALSE, length(cn))
+    un = rep(FALSE, length(cn))
     for(i in 1:length(cn)){
       un[i] = all(!duplicated(datasetInput()[,cn[i]]), !is.double(datasetInput()[,cn[i]]))
+      #un[i] = all(!duplicated(soil2[,cn[i]]), !is.double(sol[,cn[i]]))
     }
     cn = cn[un]
-     if(length(cn)>1) selectInput("labels", "Choose a variable for labeling records in heatmap:", cn)
-    }
+    if(length(cn)>1) selectInput("labels", "Choose a variable for labeling records in heatmap:", cn)
+    
   })
   
   output$recScores = renderUI({
+    if(is.datadict.profile(profileInput())){
     scores = profileInput()$scores[1:(nrow(profileInput()$scores)-2),ncol(profileInput()$scores)]
     scores = sort(unique(scores))
     if(length(scores)>1){
@@ -51,6 +53,7 @@ shinyServer(function(input, output) {
     sval = max(smin, (smax-1))
     sliderInput("sscores","Restrict to low quality records till score of", min=smin, 
                 max = smax, value = sval)
+    }
     }
   })
   
