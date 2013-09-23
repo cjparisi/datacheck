@@ -1,3 +1,7 @@
+import(Hmisc)
+import(shiny)
+import(stringr)
+
 export(as.rules)
 export(datadict.profile)
 export(has.punct)

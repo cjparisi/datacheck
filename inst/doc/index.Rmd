@@ -5,8 +5,9 @@
 
 
 ```{r setup,echo=FALSE, results='hide', message=FALSE}
-library(xtable)
+
 library(datacheck)
+library(xtable)
 options(xtable.type = 'html')
 ```
 

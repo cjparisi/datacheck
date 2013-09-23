@@ -1,5 +1,5 @@
 # load dataset soils
-library(datacheck)
+#library(datacheck)
 
 soil1 = read.csv(system.file("examples/soilsamples.csv", package="datacheck"))
 recname = paste("Name",1:nrow(soil1),sep="_")

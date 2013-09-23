@@ -1,8 +1,8 @@
 Package: datacheck
 Type: Package
 Title: Tools for checking data consistency
-Version: 1.0.0
-Date: 2013-04-22
+Version: 1.0.4
+Date: 2013-09-23
 Author: Reinhard Simon
 Maintainer: "Simon, Reinhard (CIP)" <R.SIMON@CGIAR.ORG>
 URL: http://glimmer.rstudio.com/cipotato/datacheck
@@ -14,12 +14,11 @@ Description: The package provides functionality to check variables against a
     functionality.
 License: GPL (>= 3)
 LazyData: yes
-Suggests: knitr
+Imports: Hmisc, shiny, stringr
+Suggests: knitr, xtable
 VignetteBuilder: knitr
-Depends: R (>= 2.15.1), grDevices, Hmisc, stringr, shiny, testthat,
-        xtable
-Collate: 'datacheck.R'
-Packaged: 2013-10-21 16:39:22 UTC; rsimon
+Depends: R (>= 2.15.1), grDevices
+Packaged: 2014-09-23 16:12:17 UTC; ripley
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2013-10-21 19:46:44
+Date/Publication: 2014-09-23 18:13:53

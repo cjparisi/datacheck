@@ -36,8 +36,8 @@
 NA
 
 library(grDevices)
-library(testthat)
-library(xtable)
+#library(testthat)
+#library(xtable)
 library(stringr)
 library(Hmisc)
 library(shiny)
@@ -630,7 +630,15 @@ shortSummary <- function(atable) {
     an = nm[i]
     ar = ss[[an]]$counts
     ac = names(ar)
-    dt[an, ac] = ar
+    #dt[an, ac] = ar
+    rdx = which(row.names(dt)==an)
+    for(k in 1:length(ar)){
+      if( names(ar)[k] %in% names(dt)){
+        dt[rdx, names(ar[k])] = ar[k]  
+      }
+      
+    }
+    
     if (is.numeric(atable[[an]])) {
       amin = min(atable[[an]], na.rm = T)
       amax = max(atable[[an]], na.rm = T)
