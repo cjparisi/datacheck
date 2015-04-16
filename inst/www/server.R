@@ -1,5 +1,5 @@
 # load dataset soils
-#library(datacheck)
+library(datacheck)
 
 soil1 = read.csv(system.file("examples/soilsamples.csv", package="datacheck"))
 recname = paste("Name",1:nrow(soil1),sep="_")
@@ -11,8 +11,8 @@ soil2$Latitude[7:11] = 123
 rule1=readLines(system.file("examples/soil_rules.R", package="datacheck"))
 rule2=c("","sapply(recname, is.character)","!duplicated(recname)", rule1)
 
-prof1 = datadict.profile(soil1, as.rules(rule1))
-prof2 = datadict.profile(soil2, as.rules(rule2))
+prof1 = datadict_profile(soil1, as_rules(rule1))
+prof2 = datadict_profile(soil2, as_rules(rule2))
 
 #############################################
 shinyServer(function(input, output) {
@@ -44,7 +44,7 @@ shinyServer(function(input, output) {
   })
   
   output$recScores = renderUI({
-    if(is.datadict.profile(profileInput())){
+    if(is_datadict_profile(profileInput())){
     scores = profileInput()$scores[1:(nrow(profileInput()$scores)-2),ncol(profileInput()$scores)]
     scores = sort(unique(scores))
     if(length(scores)>1){
@@ -59,9 +59,9 @@ shinyServer(function(input, output) {
   
   
   output$scoreSums = renderPlot({
-    if(is.datadict.profile(profileInput())){
+    if(is_datadict_profile(profileInput())){
       profile = profileInput()
-      scoreSum(profile)
+      score_sum(profile)
     }
   })
   
@@ -95,13 +95,13 @@ shinyServer(function(input, output) {
   
   
   output$heatmap <- renderPlot({
-    if(is.datadict.profile(profileInput())){
+    if(is_datadict_profile(profileInput())){
       
       
       rm = 300
       title = paste("Heatmap of dataquality of up to first ",rm," records", sep="")
       
-      heatmap.quality(profileInput(), input$labels, recMax = rm, scoreMax = input$sscores,
+      heatmap_quality(profileInput(), input$labels, recMax = rm, scoreMax = input$sscores,
                       main = title
       )  
     }
@@ -109,8 +109,8 @@ shinyServer(function(input, output) {
   }, width = 700, height=1000)
   
   output$coverage <- renderPlot({
-    if(is.datadict.profile(profileInput())){
-      ruleCoverage(profileInput())
+    if(is_datadict_profile(profileInput())){
+      rule_coverage(profileInput())
     }
   })
   
@@ -122,7 +122,7 @@ shinyServer(function(input, output) {
   output$descriptive <- renderTable({
     dt = datasetInput()
     if(names(dt)[1] != "V1"){
-      shortSummary(dt)
+      short_summary(dt)
     }
   })
   

@@ -1,7 +1,7 @@
 # Valid proper names
 
-is.properName("John") == TRUE
+is_proper_name("John") == TRUE
 
-is.properName("john") == FALSE
+is_proper_name("john") == FALSE
 
-is.properName(123) == FALSE
+is_proper_name(123) == FALSE 

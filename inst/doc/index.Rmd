@@ -1,17 +1,22 @@
-<!--
-%\VignetteEngine{knitr}
-%\VignetteIndexEntry{A Vignette for datacheck package}
--->
+---
+title: "A Vignette for datacheck package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteIndexEntry{A Vignette for datacheck package}
+  %\usepackage[utf8]{inputenc}
+---
+
+<!-- rmarkdown v1 -->
 
 
 ```{r setup,echo=FALSE, results='hide', message=FALSE}
-
 library(datacheck)
 library(xtable)
 options(xtable.type = 'html')
 ```
 
-A vignette for *datacheck* package (version `r pkg.version("datacheck")`)
+A vignette for *datacheck* package (version `r pkg_version("datacheck")`)
 ========================================================
 Reinhard Simon, International Potato Center, Lima, Peru
 
@@ -41,7 +46,7 @@ srules = system.file("examples/soil_rules.R", package="datacheck")
 # file.copy(srules, "soil_rules.R")
 
 ```
-Then type in the command *runDatacheck()* in the R editor.
+Then type in the command *run_datacheck()* in the R editor.
 
 Use the upload buttons to load the respective files in your working directory.
 Review the results.
@@ -56,19 +61,19 @@ read in the data.
 
 
 atable = read.csv(atable, header = TRUE, stringsAsFactors = FALSE)
-srules = read.rules(srules)
-profil = datadict.profile(atable, srules)
+srules = read_rules(srules)
+profil = datadict_profile(atable, srules)
 ```
 
 You can inspect a graphical summary of rules per variable:
 
 ```{r fig.width=7, fig.height=6}
-ruleCoverage(profil)
+rule_coverage(profil)
 ```
 
 The cumulative number of records with increasing scores.
 ```{r fig.width=7, fig.height=6}
-scoreSum(profil)
+score_sum(profil)
 ```
 
 Or see the tables (only the first 20 records and first 6 columns shown):
@@ -91,7 +96,7 @@ A last visualization is a heatmap of the score table to organize similar records
 #filter out only records with less than maximum points
 mp = max(ps$Record.score[nrow(ps)-2])
 
-heatmap.quality(profil, scoreMax = mp)
+heatmap_quality(profil, scoreMax = mp)
 
 ```
 
@@ -103,14 +108,14 @@ For comparative purposes we purposely introduce a few errors in our table as bel
 atable$P[1]  = -100
 atable$pH[11]= -200
 srule1 = srules[-c(33),]
-profil = datadict.profile(atable, srule1)
+profil = datadict_profile(atable, srule1)
 ```
 
 To get a better handle on the data it is always informative to review simple descriptive
 summaries of the data. A custom summary function is included in the package to display this summary in tabular form:
 
 ```{r results='asis'}
-xtable(shortSummary(atable))
+xtable(short_summary(atable))
 ```
 
 A summary of the results by rule can be seen from the profil object:
@@ -123,7 +128,7 @@ The *checks* part lists all erroneous records in the last column for each rule. 
 
 ```{r message=FALSE, results = 'hide'}
 atable$Sand[20:30] = -1
-profil = datadict.profile(atable, srule1)
+profil = datadict_profile(atable, srule1)
 ```
 
 ```{r results='asis'}
@@ -139,7 +144,7 @@ This may happen if the syntax is wrong. Another reason - particularly if re-usin
 ```{r message = FALSE, results='hide'}
 srule1$Variable[25] = "caCO3"
 srule1$Rule[25] = "caCO3 >= 0"
-profil = datadict.profile(atable, srule1)
+profil = datadict_profile(atable, srule1)
 
 ```
 

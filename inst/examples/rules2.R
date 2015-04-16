@@ -1,4 +1,4 @@
 # An example rule file
-x = 3
+x <- 3
 
-y <- 4
+y <- 4 

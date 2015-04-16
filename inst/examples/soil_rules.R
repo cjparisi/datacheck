@@ -1,56 +1,51 @@
+is.integer(ID)
+!duplicated(ID)
+ID > 0 & ID < 1754
 
-sapply(ID, is.integer)
- !duplicated(ID)
- ID > 0 & ID < 1754
-
-sapply(Latitude, is.numeric)
+is.numeric(Latitude)
 Latitude < 0
 
-sapply(Longitude, is.numeric)
+is.numeric(Longitude)
 Longitude < 180 & Longitude > -180
 
 is.null(Longitude) == is.null(Latitude)
 
-sapply(Adm1, is.character)
-sapply(Adm2, is.character)
-sapply(Adm3, is.character)
-sapply(Country, is.character)
-sapply(Altitude, is.integer)
+is.character(Adm1)
+is.character(Adm2)
+is.character(Adm3)
+is.character(Country)
+is.integer(Altitude)
 
-is.null(Adm1) == is.null(Longitude) # 
+is.null(Adm1) == is.null(Longitude)  # 
 is.null(Adm2) == is.null(Longitude)
 is.null(Adm3) == is.null(Longitude)
 is.null(Country) == is.null(Longitude)
 is.null(Altitude) == is.null(Longitude)
 
-sapply(pH, is.numeric)
-#sapply(pH, is.withinRange,0,14)
-pH >=  0 # pH bigger than
-pH <= 14 # pH lesser than
+is.numeric(pH)
+# sapply(pH, is.withinRange,0,14)
+pH >= 0  # pH bigger than
+pH <= 14  # pH lesser than
 
 
 
-sapply(Conductivity, is.numeric)
+is.numeric(Conductivity)
 Conductivity >= 0
 
-sapply(CaCO3, is.numeric)
+is.numeric(CaCO3)
 CaCO3 >= 0
 
-sapply(Sand, is.numeric)
-sapply(Sand, is.withinRange,0,100)
+is.numeric(Sand)
+is_within_range(Sand, 0, 100)
 
-sapply(Lime, is.numeric)
-sapply(Lime, is.withinRange,0,100)
+is.numeric(Lime)
+is_within_range(Lime, 0, 100)
 
-sapply(Clay, is.numeric)
-sapply(Clay, is.withinRange,0,100)
+is.numeric(Clay)
+is_within_range(Clay, 0, 100)
 
-sapply(Soil_texture, is.character)
-sapply(Soil_texture, is.oneOf,"Loam;Clay Loam;Sandy Loam;Sandy Clay Loam;Clay;Sand;Loamy Sand;Sandy Clay;Silt Loam;Silty Clay Loam;Silty Clay;Organic Soil")
+is.character(Soil_texture)
+is_one_of(Soil_texture, c("Loam", "Clay Loam", "Sandy Loam", "Sandy Clay Loam", "Clay", "Sand", "Loamy Sand", "Sandy Clay", "Silt Loam", "Silty Clay Loam", "Silty Clay", "Organic Soil"))
 
-sapply(P, is.numeric)
-P >= 0
-
-
-
-
+is.numeric(P)
+P >= 0 

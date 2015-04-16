@@ -1,8 +1,33 @@
-datacheck 1.0.4
+datacheck 1.2.0
+===============
+* Improvements in two functions: is_proper_name and is_one_of (thanks to Ze Loff)
+* All visible functions are being migrated to a more consistent naming scheme: words are all separated by underscore now (instead of mixture of camelcase and dots as separators).
+* Added bug reporting URL and source code repository URL
+* fixed a bug in read_rules
+
+datacheck 1.1.0
+==============
+* adopted a new release note format
+* adopted new author@R format
+
+
+datacheck 1.0.7
+==============
+* Updated DESCRIPTION file
+* Added new CIP open source license based on MIT license
+
+
+datacheck 1.0.6
+==============
+* Reworked vignette to doc
+* Removed dependencies on knitr and xtable
+
+datacheck 1.0.5
 ==============
 * Maintainance version
 * fixed several bugs
 * Removed the tests from the distribution
+
 
 datacheck 1.0.0
 ===============

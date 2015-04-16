@@ -1,5 +1,4 @@
-is.onlyLowers("example") == TRUE
+is_only_lowers("example") == TRUE
 
-is.onlyLowers("Example") == FALSE
-
-
+is_only_lowers("Example") == FALSE
+ 

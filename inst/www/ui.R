@@ -4,18 +4,18 @@ library(shiny)
 shinyUI(pageWithSidebar(
   
   # Application title
-  headerPanel("Data check: profiling a table against a set of rules"),
+  titlePanel("Data check: profiling a table against a set of rules"),
   
   # Sidebar with controls to select a dataset and specify the number
   # of observations to view
   sidebarPanel(
-    fileInput("dataset", "Input dataset file", multiple = FALSE, accept = NULL),
-    uiOutput("recLabels"),
-    fileInput("ruleset", "Input rule set file", multiple = FALSE, accept = NULL),
-    downloadButton('downloadData', 'Download score data'),
-    uiOutput("recScores"),
-    plotOutput("scoreSums"),
-    
+#     fileInput("dataset", "Input dataset file", multiple = FALSE, accept = NULL),
+#     uiOutput("recLabels"),
+#     fileInput("ruleset", "Input rule set file", multiple = FALSE, accept = NULL),
+#     downloadButton('downloadData', 'Download score data'),
+#     uiOutput("recScores"),
+#     plotOutput("scoreSums"),
+#     
     helpText(""),
     
     helpText("Any suggestion or questions should be directed to:"),
@@ -31,25 +31,26 @@ shinyUI(pageWithSidebar(
     tabsetPanel(
       tabPanel("Vignette", list(
         div(id = "vignette", includeMarkdown(system.file("doc/index.md", package = "datacheck")))
-      )),
-      tabPanel("Table",list(
-        div(id='progress',includeHTML("js/timer.js")),
-        tableOutput("view")))
-      ,
-      tabPanel("Scores",list(
-        div(id='progress',includeHTML("js/timer.js")),
-        tableOutput("scores")))
-      ,
-      
-      tabPanel("Summaries",{
-        tableOutput("descriptive")  
-      })
-      ,      
-      tabPanel("Heatmap", p(
-        plotOutput("heatmap", height = "1000px"))
-        ),
-      tabPanel("Coverage", plotOutput("coverage", height = "1500px")),
-      tabPanel("Profile",tableOutput("profile"))
+      ))
+#       ,
+#       tabPanel("Table",list(
+#         div(id='progress',includeHTML("js/timer.js")),
+#         tableOutput("view")))
+#       ,
+#       tabPanel("Scores",list(
+#         div(id='progress',includeHTML("js/timer.js")),
+#         tableOutput("scores")))
+#       ,
+#       
+#       tabPanel("Summaries",{
+#         tableOutput("descriptive")  
+#       })
+#       ,      
+#       tabPanel("Heatmap", p(
+#         plotOutput("heatmap", height = "1000px"))
+#         ),
+#       tabPanel("Coverage", plotOutput("coverage", height = "1500px")),
+#       tabPanel("Profile",tableOutput("profile"))
     )
   )
   
